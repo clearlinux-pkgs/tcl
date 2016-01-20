@@ -5,12 +5,12 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.4
-Release  : 24
+Release  : 25
 URL      : http://downloads.sourceforge.net/tcl/tcl8.6.4-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.4-src.tar.gz
 Summary  : Tcl scripting language development environment
 Group    : Development/Tools
-License  : BSL-1.0 TCL
+License  : TCL
 Requires: tcl-bin
 Requires: tcl-lib
 Requires: tcl-doc
@@ -53,6 +53,7 @@ Group: Development
 Requires: tcl-lib
 Requires: tcl-bin
 Requires: tcl-data
+Provides: tcl-devel
 
 %description dev
 dev components for the tcl package.
@@ -80,20 +81,10 @@ lib components for the tcl package.
 %patch1 -p1
 
 %build
-export AR=gcc-ar
-export RANLIB=gcc-ranlib
-export CFLAGS="$CFLAGS -ffunction-sections -fno-semantic-interposition -flto -O3 "
-export CXXFLAGS="$CXXFLAGS -ffunction-sections -fno-semantic-interposition -flto -O3 "
 pushd unix/
 %configure  --enable-symbols
 make V=1  %{?_smp_mflags}
 popd
-
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
-pushd unix ; make test ; popd
 
 %install
 rm -rf %{buildroot}
