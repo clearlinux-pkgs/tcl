@@ -1,7 +1,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.4
-Release  : 26
+Release  : 27
 URL      : http://downloads.sourceforge.net/tcl/tcl8.6.4-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.4-src.tar.gz
 Summary  : Tcl scripting language development environment
@@ -78,6 +78,7 @@ lib components for the tcl package.
 
 %build
 pushd unix/
+export CFLAGS="$CFLAGS -O3"
 %configure  --enable-symbols
 
 # build binary without funroll-loops
