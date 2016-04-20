@@ -1,9 +1,9 @@
 %define keepstatic 1
 Name     : tcl
-Version  : 8.6.4
+Version  : 8.6.5
 Release  : 27
-URL      : http://downloads.sourceforge.net/tcl/tcl8.6.4-src.tar.gz
-Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.4-src.tar.gz
+URL      : http://downloads.sourceforge.net/tcl/tcl8.6.5-src.tar.gz
+Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.5-src.tar.gz
 Summary  : Tcl scripting language development environment
 Group    : Development/Tools
 License  : TCL
@@ -15,6 +15,7 @@ BuildRequires : cmake
 BuildRequires : procps-ng
 BuildRequires : tzdata
 BuildRequires : zlib-dev
+BuildRequires : sqlite-autoconf-dev
 Patch1: build.patch
 
 %description
@@ -73,7 +74,7 @@ lib components for the tcl package.
 
 
 %prep
-%setup -q -n tcl8.6.4
+%setup -q -n tcl8.6.5
 %patch1 -p1
 
 %build
@@ -326,38 +327,39 @@ ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 /usr/lib/tcl8.6/tclIndex
 /usr/lib/tcl8.6/tm.tcl
 /usr/lib/tcl8.6/word.tcl
-/usr/lib/tcl8/8.4/platform-1.0.13.tm
-/usr/lib/tcl8/8.4/platform/shell-1.1.4.tm
-/usr/lib/tcl8/8.5/msgcat-1.5.2.tm
-/usr/lib/tcl8/8.5/tcltest-2.3.8.tm
-/usr/lib/tcl8/8.6/http-2.8.8.tm
-/usr/lib64/itcl4.0.3/itcl.tcl
-/usr/lib64/itcl4.0.3/itclConfig.sh
-/usr/lib64/itcl4.0.3/itclHullCmds.tcl
-/usr/lib64/itcl4.0.3/itclWidget.tcl
-/usr/lib64/itcl4.0.3/libitclstub4.0.3.a
-/usr/lib64/itcl4.0.3/pkgIndex.tcl
-/usr/lib64/sqlite3.8.8.3/pkgIndex.tcl
-/usr/lib64/tcl8/8.6/tdbc/sqlite3-1.0.3.tm
+/usr/lib/tcl8/8.4/platform-*.tm
+/usr/lib/tcl8/8.4/platform/shell-*.tm
+/usr/lib/tcl8/8.5/msgcat-*.tm
+/usr/lib/tcl8/8.5/tcltest-*.tm
+/usr/lib/tcl8/8.6/http-*.tm
+/usr/lib64/itcl*/itcl.tcl
+/usr/lib64/itcl*/itclConfig.sh
+/usr/lib64/itcl*/itclHullCmds.tcl
+/usr/lib64/itcl*/itclWidget.tcl
+/usr/lib64/itcl*/libitclstub*.a
+/usr/lib64/itcl*/pkgIndex.tcl
+/usr/lib64/sqlite3*/pkgIndex.tcl
+/usr/lib64/tcl8/8.6/tdbc/sqlite3-*.tm
 /usr/lib64/tclConfig.sh
 /usr/lib64/tclooConfig.sh
-/usr/lib64/tdbc1.0.3/libtdbcstub1.0.3.a
-/usr/lib64/tdbc1.0.3/pkgIndex.tcl
-/usr/lib64/tdbc1.0.3/tdbc.tcl
-/usr/lib64/tdbc1.0.3/tdbcConfig.sh
-/usr/lib64/tdbcmysql1.0.3/pkgIndex.tcl
-/usr/lib64/tdbcmysql1.0.3/tdbcmysql.tcl
-/usr/lib64/tdbcodbc1.0.3/pkgIndex.tcl
-/usr/lib64/tdbcodbc1.0.3/tdbcodbc.tcl
-/usr/lib64/tdbcpostgres1.0.3/pkgIndex.tcl
-/usr/lib64/tdbcpostgres1.0.3/tdbcpostgres.tcl
-/usr/lib64/thread2.7.2/pkgIndex.tcl
-/usr/lib64/thread2.7.2/ttrace.tcl
+/usr/lib64/tdbc*/libtdbcstub*.a
+/usr/lib64/tdbc*/pkgIndex.tcl
+/usr/lib64/tdbc*/tdbc.tcl
+/usr/lib64/tdbc*/tdbcConfig.sh
+/usr/lib64/tdbcmysql*/pkgIndex.tcl
+/usr/lib64/tdbcmysql*/tdbcmysql.tcl
+/usr/lib64/tdbcodbc*/pkgIndex.tcl
+/usr/lib64/tdbcodbc*/tdbcodbc.tcl
+/usr/lib64/tdbcpostgres*/pkgIndex.tcl
+/usr/lib64/tdbcpostgres*/tdbcpostgres.tcl
+/usr/lib64/thread*/pkgIndex.tcl
+/usr/lib64/thread*/ttrace.tcl
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/tclsh
 /usr/bin/tclsh8.6
+%exclude /usr/bin/sqlite3_analyzer
 
 %files data
 %defattr(-,root,root,-)
@@ -564,10 +566,10 @@ ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/itcl4.0.3/libitcl4.0.3.so
-/usr/lib64/sqlite3.8.8.3/libsqlite3.8.8.3.so
-/usr/lib64/tdbc1.0.3/libtdbc1.0.3.so
-/usr/lib64/tdbcmysql1.0.3/libtdbcmysql1.0.3.so
-/usr/lib64/tdbcodbc1.0.3/libtdbcodbc1.0.3.so
-/usr/lib64/tdbcpostgres1.0.3/libtdbcpostgres1.0.3.so
-/usr/lib64/thread2.7.2/libthread2.7.2.so
+/usr/lib64/itcl*/libitcl*.so
+/usr/lib64/sqlite*/libsqlite*.so
+/usr/lib64/tdbc*/libtdbc*.so
+/usr/lib64/tdbcmysql*/libtdbcmysql*.so
+/usr/lib64/tdbcodbc*/libtdbcodbc*.so
+/usr/lib64/tdbcpostgres*/libtdbcpostgres*.so
+/usr/lib64/thread*/libthread*.so
