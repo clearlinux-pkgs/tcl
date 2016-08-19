@@ -1,7 +1,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.6
-Release  : 29
+Release  : 30
 URL      : http://downloads.sourceforge.net/tcl/tcl8.6.6-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.6-src.tar.gz
 Summary  : Tcl scripting language development environment
