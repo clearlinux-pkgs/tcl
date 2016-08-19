@@ -103,6 +103,7 @@ make V=1  %{?_smp_mflags}
 popd
 ## make_install_append content
 ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
+ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 
 
 %files
@@ -556,7 +557,7 @@ ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 %defattr(-,root,root,-)
 /usr/include/*.h
 /usr/lib64/*.a
-/usr/lib64/*.so
+/usr/lib64/libtcl.so
 /usr/lib64/pkgconfig/*.pc
 
 %files doc
@@ -566,6 +567,7 @@ ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/libtcl8.6.so
 /usr/lib64/itcl*/libitcl*.so
 /usr/lib64/sqlite*/libsqlite*.so
 /usr/lib64/tdbc*/libtdbc*.so
