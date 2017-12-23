@@ -1,9 +1,9 @@
 %define keepstatic 1
 Name     : tcl
-Version  : 8.6.7
+Version  : 8.6.8
 Release  : 34
-URL      : http://downloads.sourceforge.net/tcl/tcl8.6.7-src.tar.gz
-Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.7-src.tar.gz
+URL      : http://downloads.sourceforge.net/tcl/tcl8.6.8-src.tar.gz
+Source0  : http://downloads.sourceforge.net/tcl/tcl8.6.8-src.tar.gz
 Summary  : Tcl scripting language development environment
 Group    : Development/Tools
 License  : TCL
@@ -74,7 +74,7 @@ lib components for the tcl package.
 
 
 %prep
-%setup -q -n tcl8.6.7
+%setup -q -n tcl8.6.8
 %patch1 -p1
 
 %build
