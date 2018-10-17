@@ -1,5 +1,5 @@
 PKG_NAME := tcl
-URL := http://downloads.sourceforge.net/tcl/tcl8.6.6-src.tar.gz
+URL := https://sourceforge.net/projects/tcl/files/Tcl/8.6.8/tcl8.6.8-src.tar.gz
 ARCHIVES :=
 
 include ../common/Makefile.common
