@@ -1,1 +1,0 @@
-ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh

@@ -1,0 +1,11 @@
+# build binary with funroll-loops
+export CFLAGS="$CFLAGS -O3 -ffunction-sections -fno-semantic-interposition
+-fopt-info-vec -flto"
+export CXXFLAGS="$CXXFLAGS -O3 -ffunction-sections -fno-semantic-interposition
+-fopt-info-vec"
+pushd unix/
+make V=1  %{?_smp_mflags}
+%make_install install-binaries
+popd
+ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
+ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so

@@ -1,0 +1,37 @@
+Configure miss: whether to use symlinks for manpages
+Configure miss: whether to compress the manpages
+Configure miss: whether to add a package name suffix for the manpages
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: gethostbyaddr_r with 7 args
+Configure miss: sys/modem.h usability
+Configure miss: sys/modem.h presence
+Configure miss: sys/modem.h
+Configure miss: tm_tzadj in struct tm
+Configure miss: union wait
+Configure miss: a putenv() that copies the buffer
+Configure miss: whether to enable DTrace support
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: localtime_s
+Configure miss: rand_s
+Configure miss: whether strerror_r returns char *
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: main in -lws2_32
+Configure miss: main in -lwinsock
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: main in -lws2_32
+Configure miss: main in -lwinsock
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: NaviServer/AOLserver configuration
+Configure miss: if 64bit support is requested
+Configure miss: if 64bit Sparc VIS support is requested

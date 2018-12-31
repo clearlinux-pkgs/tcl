@@ -1,0 +1,25 @@
+# This file contains recursive sources that require this package
+R-colorspace
+binutils
+cgdb
+cmake
+dejagnu
+expect
+findutils
+gcc
+gdb
+git
+graphviz
+libffi
+libgfortran-avx
+libgfortran-compat-soname3
+libgfortran-compat-soname4
+libtk-img
+ltrace
+procps-ng
+psmisc
+redis-native
+sof-crosstool-ng
+swig
+tclx
+tk
