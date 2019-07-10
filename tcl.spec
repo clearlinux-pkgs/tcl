@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.9
-Release  : 43
+Release  : 44
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Summary  : Tcl scripting language development environment
@@ -36,7 +36,6 @@ powerful command languages for applications.
 Summary: bin components for the tcl package.
 Group: Binaries
 Requires: tcl-license = %{version}-%{release}
-Requires: tcl-man = %{version}-%{release}
 
 %description bin
 bin components for the tcl package.
@@ -48,6 +47,7 @@ Group: Development
 Requires: tcl-lib = %{version}-%{release}
 Requires: tcl-bin = %{version}-%{release}
 Provides: tcl-devel = %{version}-%{release}
+Requires: tcl = %{version}-%{release}
 
 %description dev
 dev components for the tcl package.
@@ -78,6 +78,15 @@ Group: Default
 man components for the tcl package.
 
 
+%package staticdev
+Summary: staticdev components for the tcl package.
+Group: Default
+Requires: tcl-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the tcl package.
+
+
 %prep
 %setup -q -n tcl8.6.9
 %patch1 -p1
@@ -89,22 +98,27 @@ export CFLAGS="$CFLAGS -O3"
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1546303535
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562800682
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 pushd unix/
 %configure  --enable-symbols
 make  %{?_smp_mflags}
 popd
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make -C unix test
 
 %install
-export SOURCE_DATE_EPOCH=1546303535
+export SOURCE_DATE_EPOCH=1562800682
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tcl
 cp compat/license.terms %{buildroot}/usr/share/package-licenses/tcl/compat_license.terms
@@ -397,7 +411,6 @@ ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 %files dev
 %defattr(-,root,root,-)
 /usr/include/*.h
-/usr/lib64/*.a
 /usr/lib64/pkgconfig/tcl.pc
 /usr/share/man/man3/TCL_MEM_DEBUG.3
 /usr/share/man/man3/Tcl_Access.3
@@ -1275,3 +1288,7 @@ ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 /usr/share/man/mann/yield.n
 /usr/share/man/mann/yieldto.n
 /usr/share/man/mann/zlib.n
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libtclstub8.6.a
