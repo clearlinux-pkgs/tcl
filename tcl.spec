@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.9
-Release  : 44
+Release  : 45
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Summary  : Tcl scripting language development environment
@@ -99,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562800682
+export SOURCE_DATE_EPOCH=1569093987
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -118,7 +118,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make -C unix test
 
 %install
-export SOURCE_DATE_EPOCH=1562800682
+export SOURCE_DATE_EPOCH=1569093987
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tcl
 cp compat/license.terms %{buildroot}/usr/share/package-licenses/tcl/compat_license.terms
@@ -139,6 +139,8 @@ cp win/license.terms %{buildroot}/usr/share/package-licenses/tcl/win_license.ter
 pushd unix/
 %make_install install-private-headers
 popd
+## Remove excluded files
+rm -f %{buildroot}/usr/bin/sqlite3_analyzer
 ## install_append content
 export CFLAGS="$CFLAGS -O3 -ffunction-sections -fno-semantic-interposition
 -fopt-info-vec -flto"
@@ -146,7 +148,6 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffunction-sections -fno-semantic-interposition
 -fopt-info-vec"
 pushd unix/
 make V=1  %{?_smp_mflags}
-%make_install install-binaries
 popd
 ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
@@ -404,13 +405,42 @@ ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 
 %files bin
 %defattr(-,root,root,-)
-%exclude /usr/bin/sqlite3_analyzer
 /usr/bin/tclsh
 /usr/bin/tclsh8.6
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/fakemysql.h
+/usr/include/fakepq.h
+/usr/include/fakesql.h
+/usr/include/itcl.h
+/usr/include/itcl2TclOO.h
+/usr/include/itclDecls.h
+/usr/include/itclInt.h
+/usr/include/itclIntDecls.h
+/usr/include/itclMigrate2TclCore.h
+/usr/include/itclTclIntStubsFcn.h
+/usr/include/mysqlStubs.h
+/usr/include/odbcStubs.h
+/usr/include/pqStubs.h
+/usr/include/tcl.h
+/usr/include/tclDecls.h
+/usr/include/tclInt.h
+/usr/include/tclIntDecls.h
+/usr/include/tclIntPlatDecls.h
+/usr/include/tclOO.h
+/usr/include/tclOODecls.h
+/usr/include/tclOOInt.h
+/usr/include/tclOOIntDecls.h
+/usr/include/tclPlatDecls.h
+/usr/include/tclPort.h
+/usr/include/tclThread.h
+/usr/include/tclTomMath.h
+/usr/include/tclTomMathDecls.h
+/usr/include/tclUnixPort.h
+/usr/include/tdbc.h
+/usr/include/tdbcDecls.h
+/usr/include/tdbcInt.h
 /usr/lib64/pkgconfig/tcl.pc
 /usr/share/man/man3/TCL_MEM_DEBUG.3
 /usr/share/man/man3/Tcl_Access.3

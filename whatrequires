@@ -1,7 +1,7 @@
 # This file contains recursive sources that require this package
 OpenIPMI
 R-colorspace
-binutils
+R-sm
 cgdb
 cmake
 dejagnu
@@ -20,8 +20,9 @@ libffi
 libgfortran-avx
 libgfortran-compat-soname3
 libgfortran-compat-soname4
-libtk-img
 ltrace
+mingw-binutils
+mingw-gcc
 mysqltcl
 procps-ng
 psmisc
