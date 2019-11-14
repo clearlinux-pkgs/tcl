@@ -5,9 +5,10 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.9
-Release  : 45
+Release  : 46
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
+Source1  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/sqlite3.30.1.tar.gz
 Summary  : Tcl scripting language development environment
 Group    : Development/Tools
 License  : BSL-1.0 TCL
@@ -89,6 +90,11 @@ staticdev components for the tcl package.
 
 %prep
 %setup -q -n tcl8.6.9
+cd %{_builddir}
+tar xf %{_sourcedir}/sqlite3.30.1.tar.gz
+cd %{_builddir}/tcl8.6.9
+mkdir -p pkgs/sqlite3.30.1
+cp -r %{_builddir}/sqlite3.30.1/* %{_builddir}/tcl8.6.9/pkgs/sqlite3.30.1
 %patch1 -p1
 
 %build
@@ -99,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569093987
+export SOURCE_DATE_EPOCH=1573697371
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -107,6 +113,9 @@ export FFLAGS="$CFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 pushd unix/
 %configure  --enable-symbols
+## make_prepend content
+rm -rf %{_builddir}/tcl8.6.9/pkgs/sqlite3.25.3
+## make_prepend end
 make  %{?_smp_mflags}
 popd
 
@@ -118,24 +127,24 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make -C unix test
 
 %install
-export SOURCE_DATE_EPOCH=1569093987
+export SOURCE_DATE_EPOCH=1573697371
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tcl
-cp compat/license.terms %{buildroot}/usr/share/package-licenses/tcl/compat_license.terms
-cp compat/zlib/contrib/dotzlib/LICENSE_1_0.txt %{buildroot}/usr/share/package-licenses/tcl/compat_zlib_contrib_dotzlib_LICENSE_1_0.txt
-cp doc/license.terms %{buildroot}/usr/share/package-licenses/tcl/doc_license.terms
-cp library/license.terms %{buildroot}/usr/share/package-licenses/tcl/library_license.terms
-cp license.terms %{buildroot}/usr/share/package-licenses/tcl/license.terms
-cp macosx/license.terms %{buildroot}/usr/share/package-licenses/tcl/macosx_license.terms
-cp pkgs/itcl4.1.2/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_itcl4.1.2_license.terms
-cp pkgs/tdbc1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_tdbc1.1.0_license.terms
-cp pkgs/tdbcmysql1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_tdbcmysql1.1.0_license.terms
-cp pkgs/tdbcodbc1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_tdbcodbc1.1.0_license.terms
-cp pkgs/tdbcpostgres1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_tdbcpostgres1.1.0_license.terms
-cp pkgs/tdbcsqlite3-1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_tdbcsqlite3-1.1.0_license.terms
-cp pkgs/thread2.8.4/license.terms %{buildroot}/usr/share/package-licenses/tcl/pkgs_thread2.8.4_license.terms
-cp tests/license.terms %{buildroot}/usr/share/package-licenses/tcl/tests_license.terms
-cp win/license.terms %{buildroot}/usr/share/package-licenses/tcl/win_license.terms
+cp %{_builddir}/tcl8.6.9/compat/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+cp %{_builddir}/tcl8.6.9/compat/zlib/contrib/dotzlib/LICENSE_1_0.txt %{buildroot}/usr/share/package-licenses/tcl/892b34f7865d90a6f949f50d95e49625a10bc7f0
+cp %{_builddir}/tcl8.6.9/doc/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+cp %{_builddir}/tcl8.6.9/library/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+cp %{_builddir}/tcl8.6.9/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+cp %{_builddir}/tcl8.6.9/macosx/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+cp %{_builddir}/tcl8.6.9/pkgs/itcl4.1.2/license.terms %{buildroot}/usr/share/package-licenses/tcl/4118a6307945b2f93fa62face2dd2bca627b12e3
+cp %{_builddir}/tcl8.6.9/pkgs/tdbc1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/1120ce796f640bb4c7531ce2683016bb8510c97f
+cp %{_builddir}/tcl8.6.9/pkgs/tdbcmysql1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/af1bb3f2eb2888c6a0cb73a32f12b2f599f9cd1f
+cp %{_builddir}/tcl8.6.9/pkgs/tdbcodbc1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/af1bb3f2eb2888c6a0cb73a32f12b2f599f9cd1f
+cp %{_builddir}/tcl8.6.9/pkgs/tdbcpostgres1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/512084b35b6faeae6fd66a36941697390008bc9f
+cp %{_builddir}/tcl8.6.9/pkgs/tdbcsqlite3-1.1.0/license.terms %{buildroot}/usr/share/package-licenses/tcl/05c2120a6b8f992414f673c68a562cdf560f46e3
+cp %{_builddir}/tcl8.6.9/pkgs/thread2.8.4/license.terms %{buildroot}/usr/share/package-licenses/tcl/44869749a0261aabc6d26adb33554b24f9b017c2
+cp %{_builddir}/tcl8.6.9/tests/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+cp %{_builddir}/tcl8.6.9/win/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
 pushd unix/
 %make_install install-private-headers
 popd
@@ -386,7 +395,7 @@ ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 /usr/lib64/itcl4.1.2/itclWidget.tcl
 /usr/lib64/itcl4.1.2/libitclstub4.1.2.a
 /usr/lib64/itcl4.1.2/pkgIndex.tcl
-/usr/lib64/sqlite3.25.3/pkgIndex.tcl
+/usr/lib64/sqlite3.30.1/pkgIndex.tcl
 /usr/lib64/tcl8/8.6/tdbc/sqlite3-1.1.0.tm
 /usr/lib64/tclConfig.sh
 /usr/lib64/tclooConfig.sh
@@ -1101,7 +1110,7 @@ ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 /usr/lib64/itcl4.1.2/libitcl4.1.2.so
 /usr/lib64/libtcl.so
 /usr/lib64/libtcl8.6.so
-/usr/lib64/sqlite3.25.3/libsqlite3.25.3.so
+/usr/lib64/sqlite3.30.1/libsqlite3.30.1.so
 /usr/lib64/tdbc1.1.0/libtdbc1.1.0.so
 /usr/lib64/tdbcmysql1.1.0/libtdbcmysql1.1.0.so
 /usr/lib64/tdbcodbc1.1.0/libtdbcodbc1.1.0.so
@@ -1110,21 +1119,14 @@ ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/tcl/compat_license.terms
-/usr/share/package-licenses/tcl/compat_zlib_contrib_dotzlib_LICENSE_1_0.txt
-/usr/share/package-licenses/tcl/doc_license.terms
-/usr/share/package-licenses/tcl/library_license.terms
-/usr/share/package-licenses/tcl/license.terms
-/usr/share/package-licenses/tcl/macosx_license.terms
-/usr/share/package-licenses/tcl/pkgs_itcl4.1.2_license.terms
-/usr/share/package-licenses/tcl/pkgs_tdbc1.1.0_license.terms
-/usr/share/package-licenses/tcl/pkgs_tdbcmysql1.1.0_license.terms
-/usr/share/package-licenses/tcl/pkgs_tdbcodbc1.1.0_license.terms
-/usr/share/package-licenses/tcl/pkgs_tdbcpostgres1.1.0_license.terms
-/usr/share/package-licenses/tcl/pkgs_tdbcsqlite3-1.1.0_license.terms
-/usr/share/package-licenses/tcl/pkgs_thread2.8.4_license.terms
-/usr/share/package-licenses/tcl/tests_license.terms
-/usr/share/package-licenses/tcl/win_license.terms
+/usr/share/package-licenses/tcl/05c2120a6b8f992414f673c68a562cdf560f46e3
+/usr/share/package-licenses/tcl/1120ce796f640bb4c7531ce2683016bb8510c97f
+/usr/share/package-licenses/tcl/4118a6307945b2f93fa62face2dd2bca627b12e3
+/usr/share/package-licenses/tcl/44869749a0261aabc6d26adb33554b24f9b017c2
+/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
+/usr/share/package-licenses/tcl/512084b35b6faeae6fd66a36941697390008bc9f
+/usr/share/package-licenses/tcl/892b34f7865d90a6f949f50d95e49625a10bc7f0
+/usr/share/package-licenses/tcl/af1bb3f2eb2888c6a0cb73a32f12b2f599f9cd1f
 
 %files man
 %defattr(0644,root,root,0755)

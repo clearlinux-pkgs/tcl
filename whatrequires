@@ -1,9 +1,11 @@
 # This file contains recursive sources that require this package
 OpenIPMI
+ParaView
 R-colorspace
 R-sm
 cgdb
 cmake
+compat-gdbm-soname4
 dejagnu
 expect
 findutils
@@ -12,6 +14,7 @@ gcc
 gcc7
 gcc8
 gdb
+gdbm
 git
 git-gui
 graphviz
