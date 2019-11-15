@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.9
-Release  : 46
+Release  : 47
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tcl8.6.9-src.tar.gz
 Source1  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/sqlite3.30.1.tar.gz
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573697371
+export SOURCE_DATE_EPOCH=1573840840
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -127,7 +127,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make -C unix test
 
 %install
-export SOURCE_DATE_EPOCH=1573697371
+export SOURCE_DATE_EPOCH=1573840840
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tcl
 cp %{_builddir}/tcl8.6.9/compat/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
@@ -157,6 +157,8 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffunction-sections -fno-semantic-interposition
 -fopt-info-vec"
 pushd unix/
 make V=1  %{?_smp_mflags}
+%make_install install-binaries
+rm -f %{buildroot}/usr/bin/sqlite3_analyzer
 popd
 ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
