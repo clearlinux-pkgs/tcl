@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.10
-Release  : 49
+Release  : 50
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tcl8.6.10-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tcl8.6.10-src.tar.gz
 Summary  : Tcl scripting language development environment
@@ -155,6 +155,7 @@ pushd unix/
 make V=1  %{?_smp_mflags}
 %make_install install-binaries
 rm -f %{buildroot}/usr/bin/sqlite3_analyzer
+rm -f %{buildroot}/usr/share/man/man3/Thread.3
 popd
 ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so

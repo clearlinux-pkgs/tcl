@@ -7,6 +7,7 @@ pushd unix/
 make V=1  %{?_smp_mflags}
 %make_install install-binaries
 rm -f %{buildroot}/usr/bin/sqlite3_analyzer
+rm -f %{buildroot}/usr/share/man/man3/Thread.3
 popd
 ln -s /usr/bin/tclsh8.6 %{buildroot}/usr/bin/tclsh
 ln -s libtcl8.6.so %{buildroot}/usr/lib64/libtcl.so
