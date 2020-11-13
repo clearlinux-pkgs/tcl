@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tcl
 Version  : 8.6.10
-Release  : 50
+Release  : 51
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tcl8.6.10-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tcl8.6.10-src.tar.gz
 Summary  : Tcl scripting language development environment
@@ -100,11 +100,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1575401349
+export SOURCE_DATE_EPOCH=1605247376
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 pushd unix/
 %configure  --enable-symbols
@@ -122,7 +122,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make -C unix test
 
 %install
-export SOURCE_DATE_EPOCH=1575401349
+export SOURCE_DATE_EPOCH=1605247376
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tcl
 cp %{_builddir}/tcl8.6.10/compat/license.terms %{buildroot}/usr/share/package-licenses/tcl/4e9de7724f48cff19005312340a7f21ac741b94b
@@ -147,6 +147,7 @@ popd
 rm -f %{buildroot}/usr/bin/sqlite3_analyzer
 rm -f %{buildroot}/usr/share/man/man3/Thread.3
 ## install_append content
+# build binary with funroll-loops
 export CFLAGS="$CFLAGS -O3 -ffunction-sections -fno-semantic-interposition
 -fopt-info-vec -flto"
 export CXXFLAGS="$CXXFLAGS -O3 -ffunction-sections -fno-semantic-interposition
