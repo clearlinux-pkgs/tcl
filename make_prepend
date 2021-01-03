@@ -1,1 +1,0 @@
-rm -rf %{_builddir}/tcl8.6.9/pkgs/sqlite3.25.3
