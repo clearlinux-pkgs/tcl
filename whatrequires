@@ -1,9 +1,12 @@
 # This file contains recursive sources that require this package
 OpenIPMI
 R-colorspace
+R-plot3D
 R-sm
 cgdb
 cmake
+compat-gcc-10
+compat-libffi-soname6
 dejagnu
 expect
 findutils
@@ -27,5 +30,4 @@ procps-ng
 psmisc
 redis-native
 slurm
-swig
 tk
