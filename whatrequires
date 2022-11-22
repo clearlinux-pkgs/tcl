@@ -2,7 +2,6 @@
 OpenIPMI
 R-colorspace
 R-plot3D
-R-sm
 cgdb
 cmake
 compat-gcc-10
@@ -12,6 +11,7 @@ expect
 findutils
 fossil
 gcc
+gcc11
 gcc7
 gcc8
 gcc9
