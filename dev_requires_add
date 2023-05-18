@@ -1,0 +1,1 @@
+tcl-staticdev = %{version}-%{release}
